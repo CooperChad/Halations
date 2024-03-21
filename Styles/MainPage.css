@@ -19,6 +19,7 @@
   padding-left: 16px;
   padding-right: 16px;
   transition: opacity 0.3s;
+  position: relative;
   }
 
   .Youtube:hover {
@@ -42,6 +43,8 @@
   padding-left: 16px;
   padding-right: 16px;
   transition: opacity 0.3s;
+  position: relative;
+  margin-top: 20px;
   }
 
   .Random:hover {
