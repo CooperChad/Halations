@@ -1,4 +1,3 @@
-
 .title-top {
   text-align: center;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -6,3 +5,49 @@
   font-size: 50px;
   
 }
+
+.Youtube {
+  font-family: Arial;
+  text-align: center;
+  font-size: 20px;
+  background-color: rgb(199, 14, 14);
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: opacity 0.3s;
+  }
+
+  .Youtube:hover {
+    opacity: .7;
+  }
+
+  .Youtube:active {
+    opacity: .4;
+  }
+
+  .Random {
+    font-family: Arial;
+  text-align: center;
+  font-size: 20px;
+  background-color: rgb(199, 14, 14);
+  border-radius: 8px;
+  border: none;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: opacity 0.3s;
+  }
+
+  .Random:hover {
+    opacity: .7;
+  }
+
+  .Random:active {
+    opacity: .4;
+  }
