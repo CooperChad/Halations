@@ -1,56 +1,163 @@
-.title-top {
-  text-align: center;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-weight: 400px;
-  font-size: 50px;
-  
+@font-face {
+  font-family: Rocket;
+  src: url("/Fonts/rocket-raccoon-free.regular.ttf");
 }
 
-.Youtube {
+@font-face {
+  font-family: opinio;
+  src: url("/Fonts/opinio.regular.otf");
+}
+
+@font-face {
+  font-family: beach;
+  src: url(/Fonts/beach-party.regular.ttf);
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+ 
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: fixed;
+  background-color: rgb(254, 246, 235);
+  margin: 0px;
+  padding: 0px;
+  height: 9vh;
+}
+
+.label {
+  position: relative;
+  float: right;
+  margin-right: 2vh; 
+  align-items: center;
+  padding-top: 2vh;
+}
+
+.btn {
+  position: relative;
+  float: right;
+  margin-right: 2vh; 
+  align-items: center;
+  padding-top: 2vh;
+}
+.contact {
+  line-height: 5vh;
+  border-radius: 7.5vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  font-size: 2.5vh;
   font-family: Arial;
-  text-align: center;
-  font-size: 20px;
-  background-color: rgb(199, 14, 14);
-  border-radius: 8px;
   border: none;
-  color: white;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 16px;
-  padding-right: 16px;
-  transition: opacity 0.3s;
-  position: relative;
-  }
+  background-color: rgb(255, 205, 67);
+  width: 20vh;
+  color: maroon;
+}
 
-  .Youtube:hover {
-    opacity: .7;
-  }
+.contact:hover {
+  color: rgb(173, 2, 2);
+  background-color: rgb(240, 193, 63);
+}
 
-  .Youtube:active {
-    opacity: .4;
-  }
+.contactBtn {
+ display: flex;
+ justify-content: right;
+ margin-top: 1vh;
 
-  .Random {
-    font-family: Arial;
-  text-align: center;
-  font-size: 20px;
-  background-color: rgb(199, 14, 14);
-  border-radius: 8px;
+}
+
+header {
+  margin-top: 0vh;
+width: 100%;
+background-color: rgb(254, 246, 235);
+}
+
+.halation {
+  font-family: Rocket;
+  font-size: 1.5em;
+  line-height: 2.5vh;
+  margin-left: 1.5vh;
+}
+
+body {
+  background-color: rgb(254, 246, 235);
+
+}
+
+main {
+}
+
+.aboutmain {
+  padding-top: 45vh;
+  margin-bottom: 60vh;
+  width: 100%;
+}
+
+.about1 {
+  font-family: beach;
+  display: flex;
+  justify-content: left;
+  margin-left: 2vh;
+  font-size: 5vh;
+}
+
+.about2 {
+  font-family: beach;
+  display: flex;
+  justify-content: left;
+  margin-left: 2vh;
+  font-size: 5vh;
+}
+
+.youtube1 {
+  background: none;
   border: none;
-  color: white;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 16px;
-  padding-right: 16px;
-  transition: opacity 0.3s;
   position: relative;
-  margin-top: 20px;
-  }
+  float: left;
+}
+.Youtubelink {
+  border: none;
+  width: 25vh;
 
-  .Random:hover {
-    opacity: .7;
-  }
+}
 
-  .Random:active {
-    opacity: .4;
-  }
+.teammain {
+  background-color: rgb(134, 44, 44);
+  padding-top: 20vh;
+  padding-bottom: 50vh;
+}
+
+.wonka {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.team1 {
+  color: rgb(254, 246, 235);
+  font-family: beach;
+  display: flex;
+  justify-content: left;
+  margin-left: 2vh;
+  font-size: 5vh;
+  padding-top: 10vh;
+}
+.team2pic {
+  width: 50vh;
+  position: relative;
+  float: right;
+}
+
+.teamdesc {
+  font-family: sans-serif;
+  font-size: 3vh;
+  color: rgb(254, 246, 235);
+  display: flex;
+  justify-content: left;
+  margin-left: 2vh;
+
+}
