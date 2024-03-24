@@ -94,19 +94,20 @@ background-color: rgb(254, 246, 235);
   height: 100%;
   position: absolute;
   object-fit: cover;
-  z-index: 0;
+  z-index: -1;
   opacity: .5;
   
 }
 
 .caption {
   font-family: beach;
-  z-index: 1;
+  z-index: 0;
   position: relative;
   text-align: left;
   opacity: 1;
   padding-top: 50vh;
   font-size: 5vh;
+  margin-left: 2vh;
 }
 
 body {
@@ -139,12 +140,12 @@ padding-top: 30vh;
   font-family: beach;
   display: flex;
   justify-content: left;
-  margin-left: 2vh;
+  margin-left: 0vh;
   font-size: 10vh;
 }
 
 .lstbreak {
-  margin-top: 59vh;
+  margin-top: 31vh;
   border-top: 4px dashed rgb(134, 44, 44);
 }
 
@@ -152,7 +153,7 @@ padding-top: 30vh;
   background: none;
   border: none;
   position: relative;
-  float: left;
+  float: left
 }
 .Youtubelink {
   border: none;
@@ -163,7 +164,6 @@ padding-top: 30vh;
 .teammain {
   background-color: rgb(134, 44, 44);
   padding-top: 20vh;
-  padding-bottom: 50vh;
 }
 
 .wonka {
