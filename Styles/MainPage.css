@@ -96,6 +96,7 @@ background-color: rgb(254, 246, 235);
   object-fit: cover;
   z-index: -1;
   opacity: .5;
+  pointer-events: none;
   
 }
 
@@ -163,7 +164,8 @@ padding-top: 30vh;
 
 .teammain {
   background-color: rgb(134, 44, 44);
-  padding-top: 20vh;
+  padding-top: 50vh;
+  padding-bottom: 25vh;
 }
 
 .wonka {
@@ -179,11 +181,14 @@ padding-top: 30vh;
   display: flex;
   justify-content: left;
   margin-left: 2vh;
-  font-size: 5vh;
+  font-size: 10vh;
   padding-top: 10vh;
+  padding-bottom: 0vh;
+  margin-bottom: 0vh;
+
 }
 .team2pic {
-  width: 50%;
+  width: 25%;
   position: relative;
   float: right;
 }
@@ -195,7 +200,7 @@ padding-top: 30vh;
   display: flex;
   justify-content: left;
   margin-left: 2vh;
-  width: 59%;
+  width: 32%;
 }
 
 .wonka1 {
