@@ -27,6 +27,7 @@ nav {
   margin: 0px;
   padding: 0px;
   height: 9vh;
+  z-index: 1;
 }
 
 .label {
@@ -82,6 +83,32 @@ background-color: rgb(254, 246, 235);
   margin-left: 1.5vh;
 }
 
+.videocontainer {
+  height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  z-index: 0;
+  opacity: .5;
+  
+}
+
+.caption {
+  font-family: beach;
+  z-index: 1;
+  position: relative;
+  text-align: left;
+  opacity: 1;
+  padding-top: 50vh;
+  font-size: 5vh;
+}
+
 body {
   background-color: rgb(254, 246, 235);
 
@@ -90,9 +117,13 @@ body {
 main {
 }
 
+.aboutmain1 {
+padding-top: 30vh;
+}
+
 .aboutmain {
-  padding-top: 45vh;
-  margin-bottom: 60vh;
+  padding-top: vh;
+  margin-bottom: 1vh;
   width: 100%;
 }
 
@@ -101,7 +132,7 @@ main {
   display: flex;
   justify-content: left;
   margin-left: 2vh;
-  font-size: 5vh;
+  font-size: 10vh;
 }
 
 .about2 {
@@ -109,7 +140,12 @@ main {
   display: flex;
   justify-content: left;
   margin-left: 2vh;
-  font-size: 5vh;
+  font-size: 10vh;
+}
+
+.lstbreak {
+  margin-top: 59vh;
+  border-top: 4px dashed rgb(134, 44, 44);
 }
 
 .youtube1 {
@@ -147,7 +183,7 @@ main {
   padding-top: 10vh;
 }
 .team2pic {
-  width: 50vh;
+  width: 50%;
   position: relative;
   float: right;
 }
@@ -159,5 +195,14 @@ main {
   display: flex;
   justify-content: left;
   margin-left: 2vh;
+  width: 59%;
+}
 
+.wonka1 {
+  height: 13px;
+  width: 75%;
+}
+
+.wonka2 {
+  height: 13px;
 }
