@@ -162,3 +162,35 @@ main {
   justify-content: right;
 
 }
+
+.secondndbreak {
+  border-top: 4px dashed rgb(68, 140, 241);
+  }
+
+.workmain1 {
+  height: 100vh;
+  background-color: rgb(35, 33, 95);
+  display: flex;
+  flex-direction: column;
+}
+
+.worktitle {
+  text-align: center;
+  color: rgb(254, 246, 235);
+  margin-top: 10vh;
+  font-size: 5vw;
+  font-family: rocket;
+  background-color: rgb(47, 45, 118);
+  box-shadow: 0px 20px 50px 30px rgb(24, 23, 61);;
+}
+
+.workmain2 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.workmain2pic {
+  width: 100%;
+  margin-top: 15vh;
+  }
