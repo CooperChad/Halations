@@ -90,18 +90,9 @@ background-color: rgb(254, 246, 235);
   position: relative;
   text-align: left;
   opacity: 1;
-  padding-top: 20vh;
-  font-size: 4vw;
+  padding-top: 40vh;
+  font-size: 6vw;
   margin-left: 2vh;
-  color: rgb(20, 23, 67);
-}
-
-.about2 {
-  font-family: beach;
-  display: flex;
-  justify-content: left;
-  margin-left: 0vh;
-  font-size: 8vw;
   color: rgb(20, 23, 67);
 }
 
@@ -113,40 +104,22 @@ body {
 main {
 }
 
-.aboutmain1 {
-padding-top: 10vh;
-}
-
-.aboutmain {
-  padding-top: 1vh;
-  margin-bottom: 1vh;
-  width: 100%;
-}
-
-.about1 {
-  font-family: beach;
-  display: flex;
-  justify-content: left;
-  margin-left: 2vh;
-  font-size: 10vw;
-}
-
-.lstbreak {
-  margin-top: 45vh;
-  border-top: 4px dashed rgb(134, 44, 44);
-}
-
 .youtube1 {
   background: none;
   border: none;
   position: relative;
-  float: left
-}
-.Youtubelink {
-  border: none;
-  width: 15vw;
+  float: left;
 
 }
+
+.Youtubelink {
+  width: 15vw;
+}
+
+.lstbreak {
+  margin-top: 43vh;
+  border-top: 4px dashed rgb(134, 44, 44);
+  }
 
 .teammain {
   background-color: rgb(134, 44, 44);
