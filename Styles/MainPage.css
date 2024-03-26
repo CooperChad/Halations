@@ -79,26 +79,9 @@ background-color: rgb(254, 246, 235);
 .halation {
   font-family: Rocket;
   font-size: 1.5em;
-  line-height: 2.5vh;
+  line-height: 3vh;
   margin-left: 1.5vh;
   color: rgb(20, 23, 67);
-}
-
-.videocontainer {
-  height: 100vh;
-    width: 100%;
-    position: relative;
-}
-
-.video {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  object-fit: cover;
-  z-index: -1;
-  opacity: .5;
-  pointer-events: none;
-  
 }
 
 .caption {
@@ -107,9 +90,18 @@ background-color: rgb(254, 246, 235);
   position: relative;
   text-align: left;
   opacity: 1;
-  padding-top: 50vh;
-  font-size: 5vh;
+  padding-top: 20vh;
+  font-size: 4vw;
   margin-left: 2vh;
+  color: rgb(20, 23, 67);
+}
+
+.about2 {
+  font-family: beach;
+  display: flex;
+  justify-content: left;
+  margin-left: 0vh;
+  font-size: 8vw;
   color: rgb(20, 23, 67);
 }
 
@@ -122,11 +114,11 @@ main {
 }
 
 .aboutmain1 {
-padding-top: 30vh;
+padding-top: 10vh;
 }
 
 .aboutmain {
-  padding-top: vh;
+  padding-top: 1vh;
   margin-bottom: 1vh;
   width: 100%;
 }
@@ -136,20 +128,11 @@ padding-top: 30vh;
   display: flex;
   justify-content: left;
   margin-left: 2vh;
-  font-size: 10vh;
-}
-
-.about2 {
-  font-family: beach;
-  display: flex;
-  justify-content: left;
-  margin-left: 0vh;
-  font-size: 10vh;
-  color: rgb(20, 23, 67);
+  font-size: 10vw;
 }
 
 .lstbreak {
-  margin-top: 31vh;
+  margin-top: 45vh;
   border-top: 4px dashed rgb(134, 44, 44);
 }
 
@@ -161,57 +144,48 @@ padding-top: 30vh;
 }
 .Youtubelink {
   border: none;
-  width: 25vh;
+  width: 15vw;
 
 }
 
 .teammain {
   background-color: rgb(134, 44, 44);
-  padding-top: 50vh;
+  padding-top: 25vh;
   padding-bottom: 25vh;
-}
-
-.wonka {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .team1 {
   color: rgb(254, 246, 235);
+  font-size: 6vw;
   font-family: beach;
-  display: flex;
-  justify-content: left;
-  margin-left: 2vh;
-  font-size: 10vh;
-  padding-top: 10vh;
-  padding-bottom: 0vh;
-  margin-bottom: 0vh;
-
+  margin-left: 1vw;
 }
+
+.descriptionleftbottom {
+  color: rgb(254, 246, 235);
+  font-size: 2vw;
+  font-family: beach;
+  margin-left: 1vw;
+}
+
 .team2pic {
-  width: 25%;
-  position: relative;
-  float: right;
+  width: 40vw;
+  height: 100%;
 }
 
-.teamdesc {
-  font-family: sans-serif;
-  font-size: 3vh;
-  color: rgb(245, 226, 200);
+.description1 {
   display: flex;
-  justify-content: left;
-  margin-left: 2vh;
-  width: 32%;
-  font-family: beach;
+  flex-direction: row;
 }
 
-.wonka1 {
-  height: 13px;
-  width: 75%;
+.descriptionleft {
+  display: flex;
+  flex-direction: column;
 }
 
-.wonka2 {
-  height: 13px;
+.descriptionright {
+  display: flex;
+  padding-left: 15vw;
+  justify-content: right;
+
 }
