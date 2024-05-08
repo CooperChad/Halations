@@ -20,7 +20,7 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-image:url(/Pictures/Video.GIF);
+  background-image:url(/Pictures/video.mp4);
   object-fit: cover;
   z-index: -1;
   background-position: 50%;
@@ -110,7 +110,7 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-image:url(/Pictures/paper.gif);
+  background-image:url(/Pictures/paper.mp4);
   object-fit: cover;
   z-index: -1;
   background-position: 50%;
@@ -126,5 +126,3 @@ body {
 
 
 }
-
-.paper {}
