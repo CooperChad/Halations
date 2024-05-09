@@ -81,12 +81,14 @@ body {
   justify-content: center;
   align-items: flex-end;
   margin-top: 4.5vw;
+  z-index: 1;
   
 
 }
 
 .email {
   border: 0;
+  z-index: 1;
   height: 5vh;
   width: 15vw;
   border-radius: 10px;
