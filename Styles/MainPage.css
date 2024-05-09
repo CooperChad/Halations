@@ -52,6 +52,7 @@ body {
   font-size: 10vw;
   font-family: "Neue Haas Grotesk", sans-serif;
   padding-top: 30vh;
+  z-index: 0;
   
 
 }
