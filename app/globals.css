@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #e8e0d4;
+  --sage: #6b7a5e;
+  --text: #3a3530;
+  --text-muted: #7a7268;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--text);
+  font-weight: 300;
+  margin: 0;
+}
