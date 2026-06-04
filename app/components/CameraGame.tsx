@@ -33,14 +33,6 @@ export default function CameraGame() {
   const rafRef = useRef<number>(0);
   const done = captured.length === SUBJECTS.length;
 
-  // Hide on portrait screens (phones/tablets)
-  const [isTouch, setIsTouch] = useState(false);
-  useEffect(() => {
-    const check = () => setIsTouch(window.innerHeight > window.innerWidth);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
 
   const activate = useCallback(() => {
     setActive(true);
@@ -171,8 +163,6 @@ export default function CameraGame() {
   }
 
   const remaining = SUBJECTS.length - captured.length;
-
-  if (isTouch) return null;
 
   return (
     <>
