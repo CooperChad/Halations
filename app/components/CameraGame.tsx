@@ -37,8 +37,6 @@ export default function CameraGame() {
   const activate = useCallback(() => {
     setActive(true);
     document.body.classList.add("game-active");
-    const main = document.querySelector("main") as HTMLElement | null;
-    if (main) main.style.filter = "invert(1)";
   }, []);
 
   const deactivate = useCallback(() => {
@@ -47,8 +45,6 @@ export default function CameraGame() {
     setLocked(null);
     setLastCapture(null);
     document.body.classList.remove("game-active");
-    const main = document.querySelector("main") as HTMLElement | null;
-    if (main) main.style.filter = "";
   }, []);
 
   // Escape key exits
@@ -183,7 +179,7 @@ export default function CameraGame() {
           transition: "opacity 0.2s",
         }}
       >
-        <svg viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: active ? "invert(1)" : "none", transition: "filter 0.3s" }}>
           <path d="M14 4H26L29 9H37C38.1 9 39 9.9 39 11V27C39 28.1 38.1 29 37 29H3C1.9 29 1 28.1 1 27V11C1 9.9 1.9 9 3 9H11L14 4Z"
             fill="#2e2616"/>
           <circle cx="20" cy="19" r="6" fill="#f5ead8"/>
