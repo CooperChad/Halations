@@ -8,7 +8,7 @@ function getStore_() {
 export async function GET() {
   try {
     const store = getStore_();
-    const raw = await store.get("pins.json");
+    const raw = await store.get("pins.json", { type: "text" });
     if (!raw) return NextResponse.json([]);
     return NextResponse.json(JSON.parse(raw));
   } catch {
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
   const pin = await req.json();
   const store = getStore_();
-  const raw = await store.get("pins.json");
+  const raw = await store.get("pins.json", { type: "text" });
   const pins = raw ? JSON.parse(raw) : [];
   const newPin = { ...pin, id: Date.now().toString() };
   pins.push(newPin);
@@ -40,7 +40,7 @@ export async function DELETE(req: Request) {
 
   const { id } = await req.json();
   const store = getStore_();
-  const raw = await store.get("pins.json");
+  const raw = await store.get("pins.json", { type: "text" });
   const pins = raw ? JSON.parse(raw) : [];
   const updated = pins.filter((p: { id: string }) => p.id !== id);
   await store.set("pins.json", JSON.stringify(updated));
