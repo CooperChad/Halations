@@ -99,7 +99,7 @@ export default function Home() {
   return (
     <>
       <style>{`
-        * { cursor: none !important; }
+        @media (pointer: fine) { * { cursor: none !important; } }
         .photo-card {
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }

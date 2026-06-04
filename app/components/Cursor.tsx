@@ -10,6 +10,12 @@ export default function Cursor() {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
+    // Don't run on touch devices
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    if (dotRef.current) dotRef.current.style.display = "block";
+    if (ringRef.current) ringRef.current.style.display = "block";
+
     function onMove(e: MouseEvent) {
       pos.current = { x: e.clientX, y: e.clientY };
     }
@@ -49,6 +55,7 @@ export default function Cursor() {
           pointerEvents: "none",
           zIndex: 9999,
           willChange: "transform",
+          display: "none",
         }}
       />
       <div
@@ -65,6 +72,7 @@ export default function Cursor() {
           zIndex: 9998,
           willChange: "transform",
           transition: "width 0.2s, height 0.2s, border-color 0.2s",
+          display: "none",
         }}
       />
     </>
