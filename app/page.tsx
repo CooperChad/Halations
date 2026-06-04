@@ -184,9 +184,9 @@ export default function Home() {
             }}
           >
             <iframe
-              src="https://www.youtube.com/embed/dvhmnLhMQK4?rel=0&modestbranding=1"
+              src="https://www.youtube.com/embed/dvhmnLhMQK4?rel=0&modestbranding=1&playsinline=1"
               title="Halation Studio"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
               style={{ width: "100%", height: "100%", border: "none", display: "block" }}
             />

@@ -26,12 +26,27 @@ export default function Map({ pins, onMapClick, interactive = false }: Props) {
 
     import("leaflet").then((L) => {
       // Warm vintage map style
+      const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
       const map = L.map(containerRef.current!, {
         zoomControl: true,
         scrollWheelZoom: false,
+        dragging: !isTouchDevice, // disable single-finger drag on touch
+        tap: false,
         center: [40.2969, -111.6946], // Orem, Utah
         zoom: 7,
       });
+
+      // Re-enable dragging only when 2+ fingers are on the map
+      if (isTouchDevice) {
+        containerRef.current!.addEventListener("touchstart", (e) => {
+          if (e.touches.length >= 2) map.dragging.enable();
+        }, { passive: true });
+        containerRef.current!.addEventListener("touchend", () => {
+          if ((containerRef.current as Element & { _touchCount?: number })) {
+            map.dragging.disable();
+          }
+        }, { passive: true });
+      }
 
       L.tileLayer(
         "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
