@@ -80,10 +80,18 @@ export default function Home() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await fetch("/api/contact", {
+    const body = new URLSearchParams({
+      "form-name": "contact",
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+    });
+    await fetch("/netlify-forms.html", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
     });
     setSubmitted(true);
   }
