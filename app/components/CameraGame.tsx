@@ -33,13 +33,13 @@ export default function CameraGame() {
   const rafRef = useRef<number>(0);
   const done = captured.length === SUBJECTS.length;
 
-  // Don't show on touch devices — check after mount
+  // Hide on portrait screens (phones/tablets)
   const [isTouch, setIsTouch] = useState(false);
   useEffect(() => {
-    // Only hide on pure touch devices (phones/tablets), not touchscreen laptops
-    const coarse = window.matchMedia("(pointer: coarse)").matches;
-    const noMouse = !window.matchMedia("(pointer: fine)").matches;
-    setIsTouch(coarse && noMouse);
+    const check = () => setIsTouch(window.innerHeight > window.innerWidth);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
 
   const activate = useCallback(() => {
