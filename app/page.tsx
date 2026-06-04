@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Cursor from "./components/Cursor";
 import CameraGame from "./components/CameraGame";
 import MobileEffects from "./components/MobileEffects";
+import Darkroom from "./components/Darkroom";
 import type { Pin } from "./components/Map";
 
 const Map = dynamic(() => import("./components/Map"), { ssr: false });
@@ -138,6 +139,7 @@ export default function Home() {
       <Cursor />
       <CameraGame />
       <MobileEffects />
+      <Darkroom />
 
       <main>
         {/* NAV */}
