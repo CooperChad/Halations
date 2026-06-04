@@ -4,9 +4,12 @@ import { useEffect, useState, useRef } from "react";
 
 type Phase = "idle" | "pulling" | "dark" | "developing" | "done";
 
+const SECTION_SELECTORS = ["nav", "section", "footer"];
+
 export default function Darkroom() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [pullPct, setPullPct] = useState(0);
+  const [showLabel, setShowLabel] = useState(false);
   const phaseRef = useRef<Phase>("idle");
   const touchStartY = useRef(0);
   const pulling = useRef(false);
@@ -21,24 +24,57 @@ export default function Darkroom() {
     if (phaseRef.current !== "idle" && phaseRef.current !== "pulling") return;
     setPullPct(0);
 
-    // 1. Lights out
-    setPhaseSync("dark");
-    document.documentElement.classList.add("darkroom-dark");
+    // Collect all sections and hide them
+    const elements: HTMLElement[] = [];
+    SECTION_SELECTORS.forEach(sel => {
+      document.querySelectorAll<HTMLElement>(sel).forEach(el => elements.push(el));
+    });
 
-    // 2. Start developing after a beat in the dark
+    // Lights out
+    setPhaseSync("dark");
+    elements.forEach(el => {
+      el.style.opacity = "0";
+      el.style.transition = "none";
+    });
+
+    // Show "developing" label after a moment
+    setTimeout(() => setShowLabel(true), 600);
+
+    // Start developing each section with staggered delays
     setTimeout(() => {
       setPhaseSync("developing");
-      document.documentElement.classList.remove("darkroom-dark");
-      document.documentElement.classList.add("darkroom-developing");
-    }, 1200);
+      setShowLabel(false);
 
-    // 3. Fully developed
+      elements.forEach((el, i) => {
+        const delay = i * 320;
+        setTimeout(() => {
+          el.style.transition = "none";
+          el.style.opacity = "0";
+          el.style.filter = "brightness(0.05) sepia(1) contrast(1.5)";
+          el.style.transition = "opacity 0.1s, filter 2.2s ease-out";
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              el.style.opacity = "1";
+              el.style.filter = "brightness(1) sepia(0) contrast(1)";
+            });
+          });
+        }, delay);
+      });
+    }, 2000);
+
+    // Done — clean up inline styles
+    const totalTime = 2000 + elements.length * 320 + 2400;
     setTimeout(() => {
+      elements.forEach(el => {
+        el.style.opacity = "";
+        el.style.filter = "";
+        el.style.transition = "";
+      });
       setPhaseSync("done");
-      document.documentElement.classList.remove("darkroom-developing");
-    }, 4000);
+    }, totalTime);
 
-    setTimeout(() => setPhaseSync("idle"), 4200);
+    setTimeout(() => setPhaseSync("idle"), totalTime + 200);
   }
 
   // Touch pull-down
@@ -88,66 +124,87 @@ export default function Darkroom() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (phase === "idle" && pullPct === 0) return null;
+
   return (
     <>
-      {/* Red safelight overlay — only during dark phase */}
-      {(phase === "dark" || phase === "pulling") && (
+      {/* Dark overlay */}
+      <div style={{
+        position: "fixed", inset: 0, zIndex: 9985,
+        background: "rgba(5, 0, 0, 0.97)",
+        opacity: phase === "pulling" ? pullPct * 0.97
+               : phase === "dark" ? 1
+               : phase === "developing" ? 1
+               : 0,
+        pointerEvents: "none",
+        transition: phase === "dark" ? "opacity 0.35s ease-in"
+                  : phase === "done" ? "opacity 0.4s ease-out"
+                  : "none",
+      }}>
+        {/* Red safelight */}
         <div style={{
-          position: "fixed", inset: 0, zIndex: 9985,
-          background: phase === "dark"
-            ? "rgba(6, 0, 0, 0.97)"
-            : `rgba(6,0,0,${pullPct * 0.95})`,
-          pointerEvents: "none",
-          transition: phase === "dark" ? "opacity 0.4s ease-in" : "none",
+          position: "absolute", inset: 0,
+          background: "radial-gradient(ellipse at 50% 25%, rgba(150,8,0,0.3) 0%, transparent 65%)",
+          animation: phase === "dark" ? "safelightPulse 1.4s ease-in-out infinite alternate" : "none",
+        }} />
+      </div>
+
+      {/* "Your website is DEVELOPING" label */}
+      {showLabel && (
+        <div style={{
+          position: "fixed", top: "50%", left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 9986, pointerEvents: "none",
+          textAlign: "center",
+          animation: "fadeInLabel 0.5s ease-out forwards",
         }}>
-          {/* Safelight glow */}
-          {phase === "dark" && (
-            <div style={{
-              position: "absolute", inset: 0,
-              background: "radial-gradient(ellipse at 50% 30%, rgba(160,10,0,0.25) 0%, transparent 60%)",
-              animation: "safelightPulse 1.2s ease-in-out infinite alternate",
-            }} />
-          )}
+          <p style={{
+            fontFamily: "var(--font-inter), sans-serif",
+            fontSize: "clamp(0.7rem, 2vw, 0.85rem)",
+            letterSpacing: "0.22em",
+            color: "rgba(220, 180, 140, 0.7)",
+            textTransform: "uppercase",
+            marginBottom: "10px",
+          }}>
+            Your website is
+          </p>
+          <p style={{
+            fontFamily: "var(--font-playfair), serif",
+            fontSize: "clamp(1.8rem, 5vw, 3rem)",
+            letterSpacing: "0.12em",
+            /* Film negative: white strip, dark text */
+            background: "rgba(240, 220, 180, 0.95)",
+            color: "#0a0400",
+            padding: "6px 24px 8px",
+            display: "inline-block",
+            filter: "invert(1)",
+            fontStyle: "italic",
+          }}>
+            Developing
+          </p>
         </div>
       )}
 
-      {/* Pull indicator */}
-      {phase === "pulling" && pullPct > 0.2 && (
+      {/* Pull hint */}
+      {phase === "pulling" && pullPct > 0.25 && (
         <div style={{
-          position: "fixed", top: 20, left: "50%", transform: "translateX(-50%)",
-          zIndex: 9986, color: `rgba(200,80,0,${(pullPct - 0.2) * 1.25})`,
+          position: "fixed", top: 18, left: "50%", transform: "translateX(-50%)",
+          zIndex: 9986, color: `rgba(200,70,0,${(pullPct - 0.25) * 1.3})`,
           fontSize: "0.65rem", letterSpacing: "0.2em", fontFamily: "monospace",
           pointerEvents: "none",
         }}>
-          ▼ ENTER DARKROOM
+          ▼ DARKROOM
         </div>
       )}
 
       <style>{`
-        /* Lights out — page goes black instantly */
-        html.darkroom-dark main {
-          filter: brightness(0);
-          transition: filter 0.3s ease-in;
-        }
-
-        /* Developing — emerges from black through sepia amber to full color */
-        html.darkroom-developing main {
-          animation: develop 2.8s ease-out forwards;
-        }
-
-        @keyframes develop {
-          0%   { filter: brightness(0); }
-          15%  { filter: brightness(0.08) sepia(1) saturate(0.5) contrast(1.4) hue-rotate(10deg); }
-          35%  { filter: brightness(0.25) sepia(1) saturate(0.8) contrast(1.3) hue-rotate(5deg); }
-          55%  { filter: brightness(0.55) sepia(0.9) saturate(1.0) contrast(1.2); }
-          75%  { filter: brightness(0.78) sepia(0.5) saturate(1.1) contrast(1.1); }
-          90%  { filter: brightness(0.92) sepia(0.15) saturate(1.05); }
-          100% { filter: brightness(1) sepia(0) saturate(1) contrast(1); }
-        }
-
         @keyframes safelightPulse {
-          from { opacity: 0.7; }
+          from { opacity: 0.6; }
           to   { opacity: 1; }
+        }
+        @keyframes fadeInLabel {
+          from { opacity: 0; transform: translate(-50%, -46%); }
+          to   { opacity: 1; transform: translate(-50%, -50%); }
         }
       `}</style>
     </>
