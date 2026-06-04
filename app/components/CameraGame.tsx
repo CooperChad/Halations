@@ -36,7 +36,10 @@ export default function CameraGame() {
   // Don't show on touch devices — check after mount
   const [isTouch, setIsTouch] = useState(false);
   useEffect(() => {
-    setIsTouch(window.matchMedia("(pointer: coarse)").matches);
+    // Only hide on pure touch devices (phones/tablets), not touchscreen laptops
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    const noMouse = !window.matchMedia("(pointer: fine)").matches;
+    setIsTouch(coarse && noMouse);
   }, []);
 
   const activate = useCallback(() => {
