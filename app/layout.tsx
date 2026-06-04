@@ -17,11 +17,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Halation Studio",
-  description: "Documentary photo and film studio based in Utah Valley. Real moments captured for families and small businesses who'd rather have genuine stories than posed ones.",
+  description: "Documentary photo and film. Utah Valley. Real stories, tangible memories.",
   keywords: ["documentary photography", "documentary film", "Utah Valley photographer", "Orem Utah photographer", "family photography Utah", "small business photography Utah", "Halation Studio"],
   openGraph: {
     title: "Halation Studio",
-    description: "Documentary photo and film studio based in Utah Valley. Real moments captured.",
+    description: "Documentary photo and film. Utah Valley. Real stories, tangible memories.",
     url: "https://halationstudio.com",
     siteName: "Halation Studio",
     locale: "en_US",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Halation Studio",
-    description: "Documentary photo and film studio based in Utah Valley. Real moments captured.",
+    description: "Documentary photo and film. Utah Valley. Real stories, tangible memories.",
   },
   metadataBase: new URL("https://halationstudio.com"),
 };
