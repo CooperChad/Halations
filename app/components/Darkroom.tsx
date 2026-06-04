@@ -2,169 +2,109 @@
 
 import { useEffect, useState, useRef } from "react";
 
-type Phase = "idle" | "pulling" | "dark" | "developing" | "done";
-
-const SECTION_SELECTORS = ["nav", "section", "footer"];
+type Phase = "idle" | "inverted" | "developing" | "done";
 
 export default function Darkroom() {
   const [phase, setPhase] = useState<Phase>("idle");
-  const [pullPct, setPullPct] = useState(0);
   const [showLabel, setShowLabel] = useState(false);
   const phaseRef = useRef<Phase>("idle");
-  const touchStartY = useRef(0);
-  const pulling = useRef(false);
-  const wheelAccum = useRef(0);
+  const mainRef = useRef<HTMLElement | null>(null);
 
-  function setPhaseSync(p: Phase) {
-    phaseRef.current = p;
-    setPhase(p);
-  }
-
-  function trigger() {
-    if (phaseRef.current !== "idle" && phaseRef.current !== "pulling") return;
-    setPullPct(0);
-
-    // Collect all sections and hide them
-    const elements: HTMLElement[] = [];
-    SECTION_SELECTORS.forEach(sel => {
-      document.querySelectorAll<HTMLElement>(sel).forEach(el => elements.push(el));
-    });
-
-    // Lights out
-    setPhaseSync("dark");
-    elements.forEach(el => {
-      el.style.opacity = "0";
-      el.style.transition = "none";
-    });
-
-    // Show "developing" label after a moment
-    setTimeout(() => setShowLabel(true), 400);
-
-    // Start developing each section with staggered delays
-    setTimeout(() => {
-      setPhaseSync("developing");
-      setShowLabel(false);
-
-      elements.forEach((el, i) => {
-        const delay = i * 250;
-        setTimeout(() => {
-          el.style.transition = "none";
-          el.style.opacity = "0";
-          el.style.filter = "brightness(0.05) sepia(1) contrast(1.5)";
-          el.style.transition = "opacity 0.1s, filter 2s ease-out";
-
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              el.style.opacity = "1";
-              el.style.filter = "brightness(1) sepia(0) contrast(1)";
-            });
-          });
-        }, delay);
-      });
-    }, 1200);
-
-    // Done — clean up inline styles
-    const totalTime = 1200 + elements.length * 250 + 2200;
-    setTimeout(() => {
-      elements.forEach(el => {
-        el.style.opacity = "";
-        el.style.filter = "";
-        el.style.transition = "";
-      });
-      setPhaseSync("done");
-    }, totalTime);
-
-    setTimeout(() => setPhaseSync("idle"), totalTime + 200);
-  }
-
-  // Touch pull-down
   useEffect(() => {
-    function onTouchStart(e: TouchEvent) {
-      if (window.scrollY > 10) return;
-      touchStartY.current = e.touches[0].clientY;
-      pulling.current = true;
-    }
-    function onTouchMove(e: TouchEvent) {
-      if (!pulling.current) return;
-      const dy = e.touches[0].clientY - touchStartY.current;
-      if (dy < 0) { pulling.current = false; setPullPct(0); return; }
-      const pct = Math.min(dy / 120, 1);
-      setPullPct(pct);
-      if (pct > 0 && phaseRef.current === "idle") setPhaseSync("pulling");
-    }
-    function onTouchEnd() {
-      if (!pulling.current) return;
-      pulling.current = false;
-      if (pullPct >= 0.85) trigger();
-      else { setPhaseSync("idle"); setPullPct(0); }
-    }
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-    window.addEventListener("touchend", onTouchEnd);
-    return () => {
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchend", onTouchEnd);
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pullPct]);
-
-  // Desktop overscroll wheel
-  useEffect(() => {
-    function onWheel(e: WheelEvent) {
-      if (window.scrollY > 10 || e.deltaY >= 0) { wheelAccum.current = 0; return; }
-      wheelAccum.current += Math.abs(e.deltaY);
-      const pct = Math.min(wheelAccum.current / 800, 1);
-      setPullPct(pct);
-      if (phaseRef.current === "idle" && pct > 0) setPhaseSync("pulling");
-      if (pct >= 1) { wheelAccum.current = 0; trigger(); }
-    }
-    window.addEventListener("wheel", onWheel, { passive: true });
-    return () => window.removeEventListener("wheel", onWheel);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    mainRef.current = document.querySelector("main");
   }, []);
 
-  if (phase === "idle" && pullPct === 0) return null;
+  function trigger() {
+    if (phaseRef.current !== "idle") return;
+    const main = mainRef.current;
+    if (!main) return;
+
+    // 1. Instantly invert the page
+    phaseRef.current = "inverted";
+    setPhase("inverted");
+    main.style.transition = "none";
+    main.style.filter = "invert(1) sepia(0.3)";
+
+    // 2. Show label
+    setTimeout(() => setShowLabel(true), 200);
+
+    // 3. Slowly develop back to normal
+    setTimeout(() => {
+      phaseRef.current = "developing";
+      setPhase("developing");
+      setShowLabel(false);
+      main.style.transition = "filter 3s ease-out";
+      main.style.filter = "invert(0) sepia(0)";
+    }, 1800);
+
+    // 4. Clean up
+    setTimeout(() => {
+      main.style.transition = "";
+      main.style.filter = "";
+      phaseRef.current = "idle";
+      setPhase("idle");
+    }, 5000);
+  }
 
   return (
     <>
-      {/* Dark overlay */}
-      <div style={{
-        position: "fixed", inset: 0, zIndex: 9985,
-        background: "rgba(5, 0, 0, 0.97)",
-        opacity: phase === "pulling" ? pullPct * 0.97
-               : phase === "dark" ? 1
-               : phase === "developing" ? 0
-               : 0,
-        pointerEvents: "none",
-        transition: phase === "dark" ? "opacity 0.35s ease-in"
-                  : phase === "developing" ? "opacity 2s ease-out"
-                  : "none",
-      }}>
-        {/* Red safelight */}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse at 50% 25%, rgba(150,8,0,0.3) 0%, transparent 65%)",
-          animation: phase === "dark" ? "safelightPulse 1.4s ease-in-out infinite alternate" : "none",
-        }} />
+      {/* Film negative button — left side */}
+      <div
+        onClick={trigger}
+        title="Develop"
+        style={{
+          position: "fixed",
+          left: 18,
+          top: "50%",
+          transform: "translateY(-50%)",
+          zIndex: 9990,
+          cursor: "pointer",
+          opacity: phase === "idle" ? 1 : 0.3,
+          transition: "opacity 0.3s",
+          display: "flex",
+          flexDirection: "column",
+          gap: 3,
+          alignItems: "center",
+        }}
+      >
+        {/* Film strip icon */}
+        <svg width="18" height="42" viewBox="0 0 18 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Film strip body */}
+          <rect x="0" y="0" width="18" height="42" rx="1" fill="#2e2616"/>
+          {/* Sprocket holes */}
+          <rect x="2" y="3" width="4" height="4" rx="0.5" fill="#f5ead8"/>
+          <rect x="2" y="10" width="4" height="4" rx="0.5" fill="#f5ead8"/>
+          <rect x="2" y="17" width="4" height="4" rx="0.5" fill="#f5ead8"/>
+          <rect x="2" y="24" width="4" height="4" rx="0.5" fill="#f5ead8"/>
+          <rect x="2" y="31" width="4" height="4" rx="0.5" fill="#f5ead8"/>
+          <rect x="2" y="38" width="4" height="2" rx="0.5" fill="#f5ead8"/>
+          <rect x="12" y="3" width="4" height="4" rx="0.5" fill="#f5ead8"/>
+          <rect x="12" y="10" width="4" height="4" rx="0.5" fill="#f5ead8"/>
+          <rect x="12" y="17" width="4" height="4" rx="0.5" fill="#f5ead8"/>
+          <rect x="12" y="24" width="4" height="4" rx="0.5" fill="#f5ead8"/>
+          <rect x="12" y="31" width="4" height="4" rx="0.5" fill="#f5ead8"/>
+          <rect x="12" y="38" width="4" height="2" rx="0.5" fill="#f5ead8"/>
+          {/* Exposure window */}
+          <rect x="6" y="8" width="6" height="26" rx="0.5" fill="#8a7a62" opacity="0.6"/>
+        </svg>
       </div>
 
-      {/* "Your website is DEVELOPING" label */}
+      {/* "Halation Studio is Developing" label */}
       {showLabel && (
         <div style={{
           position: "fixed", top: "50%", left: "50%",
           transform: "translate(-50%, -50%)",
-          zIndex: 9986, pointerEvents: "none",
+          zIndex: 9995, pointerEvents: "none",
           textAlign: "center",
-          animation: "fadeInLabel 0.5s ease-out forwards",
+          animation: "fadeInLabel 0.4s ease-out forwards",
         }}>
           <p style={{
             fontFamily: "var(--font-playfair), serif",
-            fontSize: "clamp(1.4rem, 4vw, 2.4rem)",
+            fontSize: "clamp(1.2rem, 3vw, 2rem)",
             letterSpacing: "0.06em",
-            color: "rgba(220, 180, 140, 0.85)",
-            marginBottom: "14px",
+            color: "rgba(245, 220, 160, 0.9)",
             fontStyle: "italic",
+            marginBottom: "10px",
           }}>
             Halation Studio is
           </p>
@@ -184,23 +124,7 @@ export default function Darkroom() {
         </div>
       )}
 
-      {/* Pull hint */}
-      {phase === "pulling" && pullPct > 0.25 && (
-        <div style={{
-          position: "fixed", top: 18, left: "50%", transform: "translateX(-50%)",
-          zIndex: 9986, color: `rgba(200,70,0,${(pullPct - 0.25) * 1.3})`,
-          fontSize: "0.65rem", letterSpacing: "0.2em", fontFamily: "monospace",
-          pointerEvents: "none",
-        }}>
-          ▼ DARKROOM
-        </div>
-      )}
-
       <style>{`
-        @keyframes safelightPulse {
-          from { opacity: 0.6; }
-          to   { opacity: 1; }
-        }
         @keyframes fadeInLabel {
           from { opacity: 0; transform: translate(-50%, -46%); }
           to   { opacity: 1; transform: translate(-50%, -50%); }
