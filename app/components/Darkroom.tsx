@@ -55,8 +55,7 @@ export default function Darkroom() {
         style={{
           position: "fixed",
           left: 18,
-          top: "50%",
-          transform: "translateY(-50%)",
+          top: 18,
           zIndex: 9990,
           cursor: "pointer",
           opacity: phase === "idle" ? 1 : 0.3,
