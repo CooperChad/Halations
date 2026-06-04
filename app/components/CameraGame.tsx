@@ -37,6 +37,8 @@ export default function CameraGame() {
   const activate = useCallback(() => {
     setActive(true);
     document.body.classList.add("game-active");
+    const main = document.querySelector("main") as HTMLElement | null;
+    if (main) main.style.filter = "invert(1)";
   }, []);
 
   const deactivate = useCallback(() => {
@@ -45,6 +47,8 @@ export default function CameraGame() {
     setLocked(null);
     setLastCapture(null);
     document.body.classList.remove("game-active");
+    const main = document.querySelector("main") as HTMLElement | null;
+    if (main) main.style.filter = "";
   }, []);
 
   // Escape key exits
