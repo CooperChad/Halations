@@ -134,7 +134,8 @@ export default function Map({ pins, onMapClick, interactive = false }: Props) {
 
       pins.forEach((pin) => {
         const marker = L.marker([pin.lat, pin.lng], { icon: makePinIcon() })
-          .addTo(map as Parameters<typeof L.marker>[1] extends infer T ? T : never)
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .addTo(map as any)
           .bindTooltip(
             `<div style="font-family: 'Playfair Display', serif; color: #3a3530; padding: 4px 2px;">
               <div style="font-size: 0.95rem; font-weight: 500;">${pin.location}</div>
