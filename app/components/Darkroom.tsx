@@ -134,11 +134,11 @@ export default function Darkroom() {
         background: "rgba(5, 0, 0, 0.97)",
         opacity: phase === "pulling" ? pullPct * 0.97
                : phase === "dark" ? 1
-               : phase === "developing" ? 1
+               : phase === "developing" ? 0
                : 0,
         pointerEvents: "none",
         transition: phase === "dark" ? "opacity 0.35s ease-in"
-                  : phase === "done" ? "opacity 0.4s ease-out"
+                  : phase === "developing" ? "opacity 0.5s ease-out"
                   : "none",
       }}>
         {/* Red safelight */}
