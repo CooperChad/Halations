@@ -38,7 +38,7 @@ export default function Darkroom() {
     });
 
     // Show "developing" label after a moment
-    setTimeout(() => setShowLabel(true), 600);
+    setTimeout(() => setShowLabel(true), 400);
 
     // Start developing each section with staggered delays
     setTimeout(() => {
@@ -46,12 +46,12 @@ export default function Darkroom() {
       setShowLabel(false);
 
       elements.forEach((el, i) => {
-        const delay = i * 320;
+        const delay = i * 150;
         setTimeout(() => {
           el.style.transition = "none";
           el.style.opacity = "0";
           el.style.filter = "brightness(0.05) sepia(1) contrast(1.5)";
-          el.style.transition = "opacity 0.1s, filter 2.2s ease-out";
+          el.style.transition = "opacity 0.1s, filter 1.2s ease-out";
 
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -61,10 +61,10 @@ export default function Darkroom() {
           });
         }, delay);
       });
-    }, 2000);
+    }, 1200);
 
     // Done — clean up inline styles
-    const totalTime = 2000 + elements.length * 320 + 2400;
+    const totalTime = 1200 + elements.length * 150 + 1400;
     setTimeout(() => {
       elements.forEach(el => {
         el.style.opacity = "";
@@ -114,7 +114,7 @@ export default function Darkroom() {
     function onWheel(e: WheelEvent) {
       if (window.scrollY > 10 || e.deltaY >= 0) { wheelAccum.current = 0; return; }
       wheelAccum.current += Math.abs(e.deltaY);
-      const pct = Math.min(wheelAccum.current / 300, 1);
+      const pct = Math.min(wheelAccum.current / 800, 1);
       setPullPct(pct);
       if (phaseRef.current === "idle" && pct > 0) setPhaseSync("pulling");
       if (pct >= 1) { wheelAccum.current = 0; trigger(); }
