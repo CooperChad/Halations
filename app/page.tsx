@@ -3,7 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Cursor from "./components/Cursor";
-import TornSection from "./components/TornSection";
+import CameraGame from "./components/CameraGame";
+import MobileEffects from "./components/MobileEffects";
 import type { Pin } from "./components/Map";
 
 const Map = dynamic(() => import("./components/Map"), { ssr: false });
@@ -19,14 +20,14 @@ const PLACEHOLDER_PHOTOS = [
 const labelStyle: React.CSSProperties = {
   display: "block",
   fontSize: "0.8rem",
-  color: "#7a7268",
+  color: "#8a7a62",
   marginBottom: "8px",
   letterSpacing: "0.03em",
 };
 
 const sublabelStyle: React.CSSProperties = {
   fontSize: "0.75rem",
-  color: "#7a7268",
+  color: "#8a7a62",
   marginBottom: "6px",
   letterSpacing: "0.03em",
 };
@@ -38,7 +39,7 @@ const inputStyle: React.CSSProperties = {
   borderRadius: "4px",
   padding: "8px 12px",
   fontSize: "0.9rem",
-  color: "#3a3530",
+  color: "#2e2616",
   outline: "none",
   fontFamily: "var(--font-inter), sans-serif",
   fontWeight: 300,
@@ -135,6 +136,8 @@ export default function Home() {
       `}</style>
 
       <Cursor />
+      <CameraGame />
+      <MobileEffects />
 
       <main>
         {/* NAV */}
@@ -147,11 +150,11 @@ export default function Home() {
           top: 0, left: 0, right: 0,
           zIndex: 10,
         }}>
-          <span style={{
+          <span data-subject="logo" style={{
             fontFamily: "var(--font-playfair), serif",
             fontSize: "1.15rem",
             letterSpacing: "0.04em",
-            color: "#6b7a5e",
+            color: "#7a8c5e",
           }}>
             HalationStudio
           </span>
@@ -159,43 +162,45 @@ export default function Home() {
 
         {/* HERO */}
         <section style={{
-          minHeight: "100vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#e8e0d4",
-          paddingTop: "80px",
+          background: "#f5ead8",
+          padding: "100px 40px 60px",
           overflow: "hidden",
         }}>
+          {/* Video */}
           <div
+            data-subject="video"
             ref={heroPhotoRef}
             className="hero-photo"
             style={{
-              width: "min(580px, 82vw)",
-              aspectRatio: "3/4",
-              background: "#c8c0b4",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              width: "min(860px, 90vw)",
+              aspectRatio: "16/9",
+              margin: "0 auto",
+              boxShadow: "0 8px 48px rgba(46,38,22,0.16)",
             }}
           >
-            <span style={{ color: "#a09888", fontSize: "0.85rem", letterSpacing: "0.08em" }}>
-              hero photo
-            </span>
+            <iframe
+              src="https://www.youtube.com/embed/dvhmnLhMQK4?rel=0&modestbranding=1"
+              title="Halation Studio"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+            />
           </div>
         </section>
 
         {/* ABOUT */}
-        <section id="about" style={{ background: "#ddd4c5", padding: "60px 0", overflow: "visible" }}>
-         <TornSection rotate={-0.6} background="#f0ebe2" style={{ maxWidth: "960px", margin: "0 auto" }}>
-          <div style={{ maxWidth: "900px", margin: "0 auto", padding: "48px 0 56px" }}>
+        <section id="about" style={{ background: "#eddfc8", padding: "clamp(40px, 8vw, 80px) clamp(20px, 5vw, 40px)" }}>
+          <div data-subject="about" style={{ maxWidth: "900px", margin: "0 auto" }}>
             <h2
               ref={aboutHeadingRef}
               className="about-heading"
               style={{
                 fontFamily: "var(--font-playfair), serif",
-                fontSize: "clamp(2rem, 5vw, 3.2rem)",
-                color: "#6b7a5e",
+                fontSize: "clamp(1.6rem, 5vw, 3.2rem)",
+                color: "#7a8c5e",
                 lineHeight: 1.2,
                 marginBottom: "28px",
                 maxWidth: "700px",
@@ -207,11 +212,11 @@ export default function Home() {
             <p style={{
               fontSize: "1rem",
               lineHeight: 1.75,
-              color: "#5a5248",
+              color: "#4a3c28",
               maxWidth: "640px",
               marginBottom: "56px",
             }}>
-              I make quiet, observant photographs for families and small businesses who&apos;d rather have real moments than posed ones. Halation Studio is built around the idea that the best photos come from paying attention.
+              I make quiet, observant photos and videos for families and small businesses who&apos;d rather have real moments than posed ones. Halation Studio is built around the idea that the best work comes from paying attention.
             </p>
 
             {/* CAROUSEL */}
@@ -220,18 +225,20 @@ export default function Home() {
                 onClick={() => scroll("left")}
                 aria-label="Scroll left"
                 style={{
-                  position: "absolute", left: -20, top: "50%", transform: "translateY(-50%)",
-                  zIndex: 2, background: "white", border: "none", borderRadius: "50%",
-                  width: 40, height: 40, fontSize: "1.1rem",
+                  position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)",
+                  zIndex: 2, background: "rgba(245,234,216,0.85)", border: "none", borderRadius: "50%",
+                  width: 36, height: 36, fontSize: "1rem",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   boxShadow: "0 1px 4px rgba(0,0,0,0.12)",
                   transition: "transform 0.2s",
+                  backdropFilter: "blur(4px)",
                 }}
                 onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-50%) scale(1.1)")}
                 onMouseLeave={e => (e.currentTarget.style.transform = "translateY(-50%) scale(1)")}
               >←</button>
 
               <div
+                data-subject="carousel"
                 ref={carouselRef}
                 style={{
                   display: "flex",
@@ -239,7 +246,7 @@ export default function Home() {
                   overflowX: "auto",
                   scrollSnapType: "x mandatory",
                   scrollbarWidth: "none",
-                  background: "white",
+                  background: "#fdf6ec",
                   padding: "24px",
                 }}
               >
@@ -248,9 +255,9 @@ export default function Home() {
                     key={photo.id}
                     className="photo-card"
                     style={{
-                      flex: "0 0 220px",
+                      flex: "0 0 min(220px, 60vw)",
                       aspectRatio: "3/4",
-                      background: "#d8d0c4",
+                      background: "#d4c4a0",
                       scrollSnapAlign: "start",
                       display: "flex",
                       alignItems: "center",
@@ -268,23 +275,23 @@ export default function Home() {
                 onClick={() => scroll("right")}
                 aria-label="Scroll right"
                 style={{
-                  position: "absolute", right: -20, top: "50%", transform: "translateY(-50%)",
-                  zIndex: 2, background: "white", border: "none", borderRadius: "50%",
-                  width: 40, height: 40, fontSize: "1.1rem",
+                  position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)",
+                  zIndex: 2, background: "rgba(245,234,216,0.85)", border: "none", borderRadius: "50%",
+                  width: 36, height: 36, fontSize: "1rem",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   boxShadow: "0 1px 4px rgba(0,0,0,0.12)",
                   transition: "transform 0.2s",
+                  backdropFilter: "blur(4px)",
                 }}
                 onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-50%) scale(1.1)")}
                 onMouseLeave={e => (e.currentTarget.style.transform = "translateY(-50%) scale(1)")}
               >→</button>
             </div>
           </div>
-         </TornSection>
         </section>
 
         {/* IN THE MOMENT MAP */}
-        <section id="map" style={{ background: "#d8d0c2", padding: "80px 40px" }}>
+        <section id="map" data-subject="map" style={{ background: "#e6d8c0", padding: "clamp(40px, 8vw, 80px) clamp(20px, 5vw, 40px)" }}>
           <div style={{ maxWidth: "960px", margin: "0 auto" }}>
             <p style={{
               fontFamily: "var(--font-inter), sans-serif",
@@ -299,7 +306,7 @@ export default function Home() {
             <h2 style={{
               fontFamily: "var(--font-playfair), serif",
               fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
-              color: "#6b7a5e",
+              color: "#7a8c5e",
               marginBottom: "32px",
               lineHeight: 1.2,
             }}>
@@ -323,13 +330,12 @@ export default function Home() {
         </section>
 
         {/* CONTACT */}
-        <section id="contact" style={{ background: "#e0d8cc", padding: "60px 0", overflow: "visible" }}>
-         <TornSection rotate={0.4} background="#ede7dc" style={{ maxWidth: "700px", margin: "0 auto" }}>
-          <div style={{ maxWidth: "560px", margin: "0 auto", padding: "56px 0 64px" }}>
+        <section id="contact" style={{ background: "#eddfc8", padding: "clamp(48px, 10vw, 100px) clamp(20px, 5vw, 40px)" }}>
+          <div data-subject="contact" style={{ maxWidth: "560px", margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "var(--font-playfair), serif",
               fontSize: "clamp(1.8rem, 4vw, 2.6rem)",
-              color: "#6b7a5e",
+              color: "#7a8c5e",
               lineHeight: 1.25,
               marginBottom: "48px",
             }}>
@@ -337,7 +343,7 @@ export default function Home() {
             </h2>
 
             {submitted ? (
-              <p style={{ color: "#6b7a5e", fontSize: "1rem", lineHeight: 1.75 }}>
+              <p style={{ color: "#7a8c5e", fontSize: "1rem", lineHeight: 1.75 }}>
                 Thanks — I&apos;ll be in touch soon.
               </p>
             ) : (
@@ -382,31 +388,56 @@ export default function Home() {
               </form>
             )}
           </div>
-         </TornSection>
         </section>
 
         {/* FOOTER */}
         <footer style={{
-          background: "#e0d8cc",
-          borderTop: "1px solid #ccc4b4",
-          padding: "32px 40px",
+          background: "#eddfc8",
+          borderTop: "1px solid #c8b898",
+          padding: "40px 40px 36px",
           display: "flex",
-          justifyContent: "space-between",
+          flexDirection: "column",
           alignItems: "center",
-          flexWrap: "wrap",
-          gap: "12px",
+          gap: "20px",
         }}>
-          <span style={{
-            fontFamily: "var(--font-playfair), serif",
-            color: "#6b7a5e",
-            fontSize: "0.9rem",
-            letterSpacing: "0.04em",
-          }}>
-            HalationStudio.com
-          </span>
-          <a href="mailto:cooper@halationstudio.com" style={{ color: "#6b7a5e", fontSize: "0.85rem", textDecoration: "none" }}>
+          {/* Social icons */}
+          <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+            <a data-subject="instagram" href="https://www.instagram.com/studio.halation?igsh=enJlMnBxanduaGYz"
+              target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+              style={{ color: "#8a7a62", transition: "color 0.2s" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#7a8c5e")}
+              onMouseLeave={e => (e.currentTarget.style.color = "#8a7a62")}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+              </svg>
+            </a>
+            <a href="https://www.youtube.com/@CooperChadburn"
+              target="_blank" rel="noopener noreferrer" aria-label="YouTube"
+              style={{ color: "#8a7a62", transition: "color 0.2s" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#7a8c5e")}
+              onMouseLeave={e => (e.currentTarget.style.color = "#8a7a62")}>
+              <svg width="24" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+          </div>
+
+          {/* Email + wordmark */}
+          <a href="mailto:cooper@halationstudio.com"
+            style={{ color: "#8a7a62", fontSize: "0.8rem", textDecoration: "none", letterSpacing: "0.04em" }}>
             cooper@halationstudio.com
           </a>
+          <span style={{
+            fontFamily: "var(--font-playfair), serif",
+            color: "#b8a888",
+            fontSize: "0.75rem",
+            letterSpacing: "0.08em",
+          }}>
+            © {new Date().getFullYear()} HalationStudio
+          </span>
         </footer>
       </main>
     </>

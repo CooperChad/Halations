@@ -22,10 +22,14 @@ export default function Cursor() {
     window.addEventListener("mousemove", onMove);
 
     function animate() {
+      const gameActive = document.body.classList.contains("game-active");
+      const hide = gameActive ? "none" : "block";
       if (dotRef.current) {
+        dotRef.current.style.display = hide;
         dotRef.current.style.transform = `translate(${pos.current.x - 3}px, ${pos.current.y - 3}px)`;
       }
       if (ringRef.current) {
+        ringRef.current.style.display = hide;
         ring.current.x += (pos.current.x - ring.current.x) * 0.12;
         ring.current.y += (pos.current.y - ring.current.y) * 0.12;
         ringRef.current.style.transform = `translate(${ring.current.x - 18}px, ${ring.current.y - 18}px)`;
