@@ -46,12 +46,12 @@ export default function Darkroom() {
       setShowLabel(false);
 
       elements.forEach((el, i) => {
-        const delay = i * 150;
+        const delay = i * 250;
         setTimeout(() => {
           el.style.transition = "none";
           el.style.opacity = "0";
           el.style.filter = "brightness(0.05) sepia(1) contrast(1.5)";
-          el.style.transition = "opacity 0.1s, filter 1.2s ease-out";
+          el.style.transition = "opacity 0.1s, filter 2s ease-out";
 
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -64,7 +64,7 @@ export default function Darkroom() {
     }, 1200);
 
     // Done — clean up inline styles
-    const totalTime = 1200 + elements.length * 150 + 1400;
+    const totalTime = 1200 + elements.length * 250 + 2200;
     setTimeout(() => {
       elements.forEach(el => {
         el.style.opacity = "";
@@ -138,7 +138,7 @@ export default function Darkroom() {
                : 0,
         pointerEvents: "none",
         transition: phase === "dark" ? "opacity 0.35s ease-in"
-                  : phase === "developing" ? "opacity 0.5s ease-out"
+                  : phase === "developing" ? "opacity 2s ease-out"
                   : "none",
       }}>
         {/* Red safelight */}
