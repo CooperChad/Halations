@@ -78,8 +78,17 @@ export default function Home() {
     carouselRef.current.scrollBy({ left: dir === "left" ? -320 : 320, behavior: "smooth" });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const body = new URLSearchParams({
+      "form-name": "contact",
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+    });
+    await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString() });
     setSubmitted(true);
   }
 
@@ -276,7 +285,8 @@ export default function Home() {
                 Thanks — I&apos;ll be in touch soon.
               </p>
             ) : (
-              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <form name="contact" data-netlify="true" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                <input type="hidden" name="form-name" value="contact" />
                 <div>
                   <label style={labelStyle}>Name</label>
                   <div style={{ display: "flex", gap: "12px" }}>
