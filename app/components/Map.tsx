@@ -31,7 +31,7 @@ export default function Map({ pins, onMapClick, interactive = false }: Props) {
         zoomControl: true,
         scrollWheelZoom: false,
         dragging: !isTouchDevice, // disable single-finger drag on touch
-        tap: false,
+
         center: [40.2969, -111.6946], // Orem, Utah
         zoom: 7,
       });
