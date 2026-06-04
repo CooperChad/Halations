@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Cursor from "./components/Cursor";
+import TornSection from "./components/TornSection";
+import type { Pin } from "./components/Map";
+
+const Map = dynamic(() => import("./components/Map"), { ssr: false });
 
 const PLACEHOLDER_PHOTOS = [
   { id: 1, alt: "Family in the park" },
@@ -44,6 +49,11 @@ export default function Home() {
     firstName: "", lastName: "", email: "", subject: "", message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [pins, setPins] = useState<Pin[]>([]);
+
+  useEffect(() => {
+    fetch("/api/pins").then(r => r.json()).then(setPins).catch(() => {});
+  }, []);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   // Mouse tracking
@@ -176,8 +186,9 @@ export default function Home() {
         </section>
 
         {/* ABOUT */}
-        <section id="about" style={{ background: "#ddd4c5", padding: "80px 40px" }}>
-          <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+        <section id="about" style={{ background: "#ddd4c5", padding: "60px 0", overflow: "visible" }}>
+         <TornSection rotate={-0.6} background="#f0ebe2" style={{ maxWidth: "960px", margin: "0 auto" }}>
+          <div style={{ maxWidth: "900px", margin: "0 auto", padding: "48px 0 56px" }}>
             <h2
               ref={aboutHeadingRef}
               className="about-heading"
@@ -269,11 +280,52 @@ export default function Home() {
               >→</button>
             </div>
           </div>
+         </TornSection>
+        </section>
+
+        {/* IN THE MOMENT MAP */}
+        <section id="map" style={{ background: "#d8d0c2", padding: "80px 40px" }}>
+          <div style={{ maxWidth: "960px", margin: "0 auto" }}>
+            <p style={{
+              fontFamily: "var(--font-inter), sans-serif",
+              fontSize: "0.75rem",
+              letterSpacing: "0.18em",
+              color: "#8a9a7c",
+              textTransform: "uppercase",
+              marginBottom: "12px",
+            }}>
+              #inthemoment
+            </p>
+            <h2 style={{
+              fontFamily: "var(--font-playfair), serif",
+              fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
+              color: "#6b7a5e",
+              marginBottom: "32px",
+              lineHeight: 1.2,
+            }}>
+              Where I&apos;m shooting next.
+            </h2>
+            <div style={{
+              height: 440,
+              borderRadius: 4,
+              overflow: "hidden",
+              boxShadow: "0 4px 24px rgba(80,50,20,0.13)",
+              border: "1px solid #c0b8a8",
+            }}>
+              <Map pins={pins} />
+            </div>
+            {pins.length === 0 && (
+              <p style={{ color: "#a09888", fontSize: "0.85rem", marginTop: 16, fontStyle: "italic" }}>
+                No upcoming shoots pinned yet — check back soon.
+              </p>
+            )}
+          </div>
         </section>
 
         {/* CONTACT */}
-        <section id="contact" style={{ background: "#e0d8cc", padding: "100px 40px" }}>
-          <div style={{ maxWidth: "560px", margin: "0 auto" }}>
+        <section id="contact" style={{ background: "#e0d8cc", padding: "60px 0", overflow: "visible" }}>
+         <TornSection rotate={0.4} background="#ede7dc" style={{ maxWidth: "700px", margin: "0 auto" }}>
+          <div style={{ maxWidth: "560px", margin: "0 auto", padding: "56px 0 64px" }}>
             <h2 style={{
               fontFamily: "var(--font-playfair), serif",
               fontSize: "clamp(1.8rem, 4vw, 2.6rem)",
@@ -330,6 +382,7 @@ export default function Home() {
               </form>
             )}
           </div>
+         </TornSection>
         </section>
 
         {/* FOOTER */}
