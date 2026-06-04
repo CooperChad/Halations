@@ -101,9 +101,10 @@ export default function Darkroom() {
             fontFamily: "var(--font-playfair), serif",
             fontSize: "clamp(1.2rem, 3vw, 2rem)",
             letterSpacing: "0.06em",
-            color: "rgba(245, 220, 160, 0.9)",
+            color: "#f5ead8",
             fontStyle: "italic",
             marginBottom: "10px",
+            textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.6)",
           }}>
             Halation Studio is
           </p>
