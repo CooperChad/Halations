@@ -159,20 +159,19 @@ export default function Darkroom() {
           animation: "fadeInLabel 0.5s ease-out forwards",
         }}>
           <p style={{
-            fontFamily: "var(--font-inter), sans-serif",
-            fontSize: "clamp(0.7rem, 2vw, 0.85rem)",
-            letterSpacing: "0.22em",
-            color: "rgba(220, 180, 140, 0.7)",
-            textTransform: "uppercase",
-            marginBottom: "10px",
+            fontFamily: "var(--font-playfair), serif",
+            fontSize: "clamp(1.4rem, 4vw, 2.4rem)",
+            letterSpacing: "0.06em",
+            color: "rgba(220, 180, 140, 0.85)",
+            marginBottom: "14px",
+            fontStyle: "italic",
           }}>
-            Your website is
+            Halation Studio is
           </p>
           <p style={{
             fontFamily: "var(--font-playfair), serif",
             fontSize: "clamp(1.8rem, 5vw, 3rem)",
             letterSpacing: "0.12em",
-            /* Film negative: white strip, dark text */
             background: "rgba(240, 220, 180, 0.95)",
             color: "#0a0400",
             padding: "6px 24px 8px",
