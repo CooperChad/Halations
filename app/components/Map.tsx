@@ -64,10 +64,10 @@ export default function Map({ pins, onMapClick, interactive = false }: Props) {
             filter: drop-shadow(0 2px 3px rgba(80,50,20,0.35));
           ">
             <svg width="24" height="32" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="12" cy="11" rx="9" ry="9" fill="#6b7a5e"/>
-              <ellipse cx="12" cy="10" rx="6" ry="6" fill="#8a9a7c"/>
+              <ellipse cx="12" cy="11" rx="9" ry="9" fill="#c0392b"/>
+              <ellipse cx="12" cy="10" rx="6" ry="6" fill="#e05545"/>
               <ellipse cx="10" cy="8" rx="2" ry="2" fill="rgba(255,255,255,0.35)"/>
-              <path d="M12 18 L9 30 L12 26 L15 30 Z" fill="#6b7a5e"/>
+              <path d="M12 18 L9 30 L12 26 L15 30 Z" fill="#c0392b"/>
             </svg>
           </div>`,
           iconSize: [28, 36],
@@ -120,10 +120,10 @@ export default function Map({ pins, onMapClick, interactive = false }: Props) {
             filter: drop-shadow(0 2px 3px rgba(80,50,20,0.35));
           ">
             <svg width="24" height="32" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="12" cy="11" rx="9" ry="9" fill="#6b7a5e"/>
-              <ellipse cx="12" cy="10" rx="6" ry="6" fill="#8a9a7c"/>
+              <ellipse cx="12" cy="11" rx="9" ry="9" fill="#c0392b"/>
+              <ellipse cx="12" cy="10" rx="6" ry="6" fill="#e05545"/>
               <ellipse cx="10" cy="8" rx="2" ry="2" fill="rgba(255,255,255,0.35)"/>
-              <path d="M12 18 L9 30 L12 26 L15 30 Z" fill="#6b7a5e"/>
+              <path d="M12 18 L9 30 L12 26 L15 30 Z" fill="#c0392b"/>
             </svg>
           </div>`,
           iconSize: [28, 36],
