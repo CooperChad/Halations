@@ -63,6 +63,9 @@ export default function Home() {
             <a href="#films">Films</a>
             <a href="#about">About</a>
             <a href="#journal">Journal</a>
+            <a href="https://halationstudio11.pixieset.com" target="_blank" rel="noopener noreferrer">
+              Client Galleries
+            </a>
             <a href="#book">Contact</a>
             <a className="nav-button" href="#book">
               Book a Film
