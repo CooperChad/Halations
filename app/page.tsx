@@ -1,5 +1,6 @@
 import Image from "next/image";
 import heroImage from "@/Pictures/IMG_8842.jpeg";
+import MobileNav from "./components/MobileNav";
 
 const filmTypes = [
   {
@@ -71,10 +72,11 @@ export default function Home() {
               Book a Film
             </a>
           </nav>
+          <MobileNav />
         </header>
 
         <div className="hero__content">
-          <p className="eyebrow">Documentary Films</p>
+          <p className="eyebrow">Documentary Film &amp; Photography</p>
           <h1>Films for the moments you&apos;ll want to remember.</h1>
           <p>
             Halation Studio creates cinematic documentary films for families,
