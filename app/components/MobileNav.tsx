@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const LINKS = [
   { label: "Photography", href: "#photography", external: false },
   { label: "About", href: "#about", external: false },
-  { label: "Client Galleries", href: "https://halationstudio11.pixieset.com", external: true },
+  { label: "Client Galleries", href: "https://halationstudio.pixieset.com", external: true },
   { label: "Contact", href: "#book", external: false },
 ];
 

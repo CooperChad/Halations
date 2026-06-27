@@ -2,22 +2,25 @@ import Image from "next/image";
 import heroImage from "@/Pictures/IMG_8842.jpeg";
 import homecomingImage from "@/Pictures/_DSC2315.jpg";
 import anniversaryImage from "@/Pictures/_DSC3679.jpg";
+import familyImage from "@/Pictures/family-disneyland.jpg";
 import MobileNav from "./components/MobileNav";
 
 const photoTypes = [
   {
     title: "Weddings",
-    copy: "Documentary-style wedding photography that captures the day as it really happened, not overly staged.",
+    copy: "Wedding-day photographs centered on the people, emotion, and moments that make the day yours.",
     status: "Now booking weddings for this season.",
     image: null,
     position: "50% 50%",
+    fit: "cover",
   },
   {
     title: "Family",
     copy: "Honest photos of your everyday — the little moments you never want to forget.",
     status: "Now booking family sessions.",
-    image: "/reference-images/family-couch-reference.jpg",
-    position: "50% 35%",
+    image: familyImage,
+    position: "50% 48%",
+    fit: "cover",
   },
   {
     title: "Mission Homecomings",
@@ -25,13 +28,15 @@ const photoTypes = [
     status: "Now booking homecomings.",
     image: homecomingImage,
     position: "50% 30%",
+    fit: "cover",
   },
   {
     title: "Couples & Anniversary",
-    copy: "Quiet, real moments between two people — not posed, just true to who you are together.",
+    copy: "A record of the way you are together, from anniversaries to the ordinary seasons in between.",
     status: "Now booking couples sessions.",
     image: anniversaryImage,
-    position: "50% 25%",
+    position: "50% 50%",
+    fit: "contain",
   },
 ];
 
@@ -116,7 +121,7 @@ export default function Home() {
           <nav className="site-nav">
             <a href="#photography">Photography</a>
             <a href="#about">About</a>
-            <a href="https://halationstudio11.pixieset.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://halationstudio.pixieset.com" target="_blank" rel="noopener noreferrer">
               Client Galleries
             </a>
             <a href="#book">Contact</a>
@@ -154,7 +159,9 @@ export default function Home() {
         <div className="film-grid">
           {photoTypes.map((photo) => (
             <article className="film-card" key={photo.title}>
-              <div className="film-card__image">
+              <div
+                className={`film-card__image${photo.fit === "contain" ? " film-card__image--contained" : ""}`}
+              >
                 {photo.image ? (
                   <Image
                     src={photo.image}
@@ -214,9 +221,9 @@ export default function Home() {
         <div className="weddings__intro">
           <p>
             I&apos;m taking on a limited number of weddings through Halation
-            Studio — natural, documentary-style photography for couples who
-            want their day captured as it really happened, not overly staged.
-            I work solo, so every wedding gets my full attention.
+            Studio — attentive, documentary-style photography centered on the
+            people, emotion, and moments that make the day yours. I work solo,
+            so every wedding gets my full attention.
           </p>
           <p>
             Coverage starts with the ceremony and builds up from there — add

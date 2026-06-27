@@ -238,6 +238,15 @@ h1 {
   filter: saturate(0.84) contrast(1.02);
 }
 
+.film-card__image--contained {
+  background: #c7bfb3;
+}
+
+.film-card__image--contained img {
+  object-fit: contain;
+  padding: 10px;
+}
+
 .film-card__image-label {
   text-transform: uppercase;
   font-size: 0.66rem;
