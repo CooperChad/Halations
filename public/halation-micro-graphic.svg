@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Halation Studio micro graphic</title>
+  <desc id="desc">A simple Halation Studio monogram with a cinematic halo.</desc>
+  <rect width="512" height="512" rx="88" fill="#F4F0E9"/>
+  <circle cx="256" cy="256" r="150" fill="#FFFAF1"/>
+  <circle cx="256" cy="256" r="126" stroke="#B7A98F" stroke-width="8" opacity="0.48"/>
+  <circle cx="256" cy="256" r="88" stroke="#161412" stroke-width="3" opacity="0.18"/>
+  <path d="M182 334L256 162L330 334" stroke="#161412" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M211 269H301" stroke="#161412" stroke-width="16" stroke-linecap="round"/>
+  <path d="M162 256H350" stroke="#161412" stroke-width="8" stroke-linecap="round" opacity="0.22"/>
+  <circle cx="256" cy="256" r="19" fill="#161412"/>
+  <circle cx="249" cy="249" r="6" fill="#FFFAF1"/>
+</svg>

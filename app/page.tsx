@@ -11,13 +11,6 @@ const filmTypes = [
     position: "50% 50%",
   },
   {
-    title: "Wedding Films",
-    copy: "Documentary wedding films that capture the real moments and true emotions of your day.",
-    status: "Now booking first wedding films. Early couples help shape the examples future clients will see.",
-    image: "/reference-images/wedding-film-reference.png",
-    position: "50% 50%",
-  },
-  {
     title: "Story Films",
     copy: "Honest films for the people behind the businesses, brands, and places that make an impact.",
     status: "Now booking first story films for makers, brands, and meaningful local work.",
@@ -43,14 +36,13 @@ const journalNotes = [
 
 const weddingPackages = [
   {
-    name: "Temple Essentials",
-    price: "$750",
-    bestFor: "Simple temple-day coverage",
+    name: "Wedding Day",
+    price: "$650",
+    bestFor: "Straightforward day-of coverage",
     includes: [
-      "Up to 2 hours of wedding-day coverage",
-      "Temple exit & family photos",
-      "Wedding party photos",
-      "Couple portraits on temple grounds",
+      "Up to 3 hours of wedding-day coverage",
+      "Family & wedding party photos",
+      "Couple portraits",
       "150+ edited photos",
       "Online gallery",
       "Sneak peeks within 72 hours",
@@ -59,13 +51,13 @@ const weddingPackages = [
     featured: false,
   },
   {
-    name: "LDS Wedding Day",
-    price: "$1,200",
-    bestFor: "Temple + reception coverage",
+    name: "Wedding Day + Reception",
+    price: "$950",
+    bestFor: "Full day, ceremony to send-off",
     includes: [
-      "Up to 4 hours of wedding-day coverage",
-      "Everything in Temple Essentials",
-      "Reception details & candids",
+      "Up to 5 hours of wedding-day coverage",
+      "Everything in Wedding Day",
+      "Full reception coverage",
       "Cake cutting, first dance & send-off",
       "250+ edited photos",
       "Online gallery",
@@ -75,15 +67,15 @@ const weddingPackages = [
     featured: false,
   },
   {
-    name: "LDS Wedding Collection",
-    price: "$1,800",
-    bestFor: "The full wedding experience",
+    name: "Full Wedding Collection",
+    price: "$1,450",
+    bestFor: "The complete experience",
     includes: [
       "Engagement session",
       "Bridal / formal session",
-      "Up to 4 hours of wedding-day coverage",
-      "Everything in LDS Wedding Day",
-      "500+ edited photos across all sessions",
+      "Up to 6 hours of wedding-day coverage",
+      "Everything in Wedding Day + Reception",
+      "400+ edited photos across all sessions",
       "Sneak peeks after each session",
       "Full wedding gallery in 5–6 weeks",
     ],
@@ -92,11 +84,11 @@ const weddingPackages = [
 ];
 
 const weddingAddOns = [
-  { label: "Engagement session", price: "$300" },
-  { label: "Bridal / formal session", price: "$400" },
-  { label: "Extra wedding-day hour", price: "$150/hr" },
-  { label: "Second photographer", price: "$400–700" },
-  { label: "Additional location", price: "$100" },
+  { label: "Add reception coverage", price: "$250" },
+  { label: "Engagement session", price: "$250" },
+  { label: "Bridal / formal session", price: "$300" },
+  { label: "Extra wedding-day hour", price: "$125/hr" },
+  { label: "Additional location", price: "$75" },
   { label: "Rush delivery", price: "+25%" },
   { label: "Travel beyond Utah Valley", price: "$0.75/mi" },
 ];
@@ -230,23 +222,24 @@ export default function Home() {
 
       <section className="weddings" id="weddings">
         <div className="section-heading">
-          <p className="eyebrow">Now Booking — LDS Weddings</p>
+          <p className="eyebrow">Now Booking — Weddings</p>
           <h2>Wedding photography, captured honestly.</h2>
         </div>
 
         <div className="weddings__intro">
           <p>
-            I&apos;m taking on select weddings through Halation Studio —
-            natural, documentary-style photography for couples who want their
-            day captured as it really happened, not overly staged. My focus is
-            real moments, family, and emotion.
+            I&apos;m taking on a limited number of weddings through Halation
+            Studio — natural, documentary-style photography for couples who
+            want their day captured as it really happened, not overly staged.
+            I work solo, so every wedding gets my full attention. Right now
+            I&apos;m focused on photography only.
           </p>
           <p>
-            For LDS weddings, coverage begins at the temple exit, since
-            photography isn&apos;t done inside the sealing. From there I
-            document family photos, couple portraits, and your reception. Most
-            couples pair the day with an engagement and a bridal or formal
-            session beforehand.
+            Coverage starts with the ceremony and builds up from there — add
+            reception coverage, an engagement session, or a bridal/formal
+            session as you need them. (For couples marrying in a temple,
+            photography isn&apos;t permitted inside the sealing, so coverage
+            begins at the exit.)
           </p>
         </div>
 
@@ -256,9 +249,6 @@ export default function Home() {
               className={`wedding-card${pkg.featured ? " wedding-card--featured" : ""}`}
               key={pkg.name}
             >
-              {pkg.featured && (
-                <span className="wedding-card__tag">Most Popular</span>
-              )}
               <h3 className="wedding-card__name">{pkg.name}</h3>
               <p className="wedding-card__price">{pkg.price}</p>
               <p className="wedding-card__best">{pkg.bestFor}</p>
@@ -288,9 +278,9 @@ export default function Home() {
 
         <p className="weddings__note">
           Introductory pricing while I build the wedding side of Halation
-          Studio. A non-refundable retainer books your date, with the balance
-          split across your sessions. Photography is not done inside the temple
-          sealing.
+          Studio — these rates will go up as I book more weddings. A
+          non-refundable retainer holds your date, with the balance split
+          across your sessions.
         </p>
       </section>
 
@@ -321,10 +311,9 @@ export default function Home() {
             <input name="email" type="email" autoComplete="email" required />
           </label>
           <label>
-            Film Type
+            Project Type
             <select name="filmType" defaultValue="Family film" required>
               <option>Family film</option>
-              <option>Wedding film</option>
               <option>Wedding photography</option>
               <option>Story film</option>
               <option>Not sure yet</option>
