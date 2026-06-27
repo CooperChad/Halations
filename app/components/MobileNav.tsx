@@ -3,9 +3,8 @@
 import { useState, useEffect } from "react";
 
 const LINKS = [
-  { label: "Films", href: "#films", external: false },
+  { label: "Photography", href: "#photography", external: false },
   { label: "About", href: "#about", external: false },
-  { label: "Journal", href: "#journal", external: false },
   { label: "Client Galleries", href: "https://halationstudio11.pixieset.com", external: true },
   { label: "Contact", href: "#book", external: false },
 ];
@@ -48,7 +47,7 @@ export default function MobileNav() {
             </a>
           ))}
           <a className="mobile-nav-book" href="#book" onClick={() => setOpen(false)}>
-            Book a Film
+            Book a Session
           </a>
         </nav>
       </div>

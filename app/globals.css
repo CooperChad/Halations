@@ -224,6 +224,9 @@ h1 {
 
 .film-card__image {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   aspect-ratio: 1.42 / 1;
   margin-bottom: 22px;
   overflow: hidden;
@@ -233,6 +236,14 @@ h1 {
 .film-card__image img {
   object-fit: cover;
   filter: saturate(0.84) contrast(1.02);
+}
+
+.film-card__image-label {
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(22, 20, 18, 0.4);
 }
 
 .film-card h3 {
@@ -339,74 +350,6 @@ h1 {
   width: fit-content;
   min-height: 48px;
   border-color: rgba(255, 250, 241, 0.62);
-}
-
-.journal {
-  padding: clamp(58px, 8vw, 88px) clamp(24px, 5.8vw, 76px);
-  background: var(--paper);
-}
-
-.journal__heading {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
-  gap: clamp(24px, 6vw, 80px);
-  max-width: 1120px;
-  margin: 0 auto clamp(34px, 5vw, 52px);
-  align-items: end;
-}
-
-.journal__heading .eyebrow {
-  grid-column: 1 / -1;
-  margin-bottom: -10px;
-}
-
-.journal__heading h2 {
-  margin-bottom: 0;
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  line-height: 1.05;
-}
-
-.journal__heading p:not(.eyebrow) {
-  margin-bottom: 4px;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
-
-.journal-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 2vw, 26px);
-  max-width: 1120px;
-  margin: 0 auto;
-}
-
-.journal-card {
-  min-width: 0;
-  border-top: 1px solid var(--line);
-  padding-top: 22px;
-}
-
-.journal-card .eyebrow {
-  margin-bottom: 18px;
-  color: var(--muted);
-  font-size: 0.62rem;
-}
-
-.journal-card h3 {
-  max-width: 310px;
-  margin-bottom: 14px;
-  font-family: var(--font-playfair), serif;
-  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
-  font-weight: 400;
-  line-height: 1.08;
-}
-
-.journal-card p:not(.eyebrow) {
-  max-width: 330px;
-  color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
 }
 
 .booking {
@@ -557,15 +500,6 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .journal__heading,
-  .journal-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .journal__heading .eyebrow {
-    margin-bottom: 0;
-  }
-
   .booking {
     grid-template-columns: 1fr;
   }
@@ -624,10 +558,6 @@ h1 {
   }
 
   .film-types {
-    padding-inline: 20px;
-  }
-
-  .journal {
     padding-inline: 20px;
   }
 

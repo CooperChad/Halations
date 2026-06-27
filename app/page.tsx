@@ -2,35 +2,34 @@ import Image from "next/image";
 import heroImage from "@/Pictures/IMG_8842.jpeg";
 import MobileNav from "./components/MobileNav";
 
-const filmTypes = [
+const photoTypes = [
   {
-    title: "Family Films",
-    copy: "Cinematic films of your everyday. The little moments you never want to forget.",
-    status: "Now booking first family films. This example library will grow from those projects.",
-    image: "/reference-images/family-film-reference.png",
+    title: "Weddings",
+    copy: "Documentary-style wedding photography that captures the day as it really happened, not overly staged.",
+    status: "Now booking weddings for this season.",
+    image: null,
     position: "50% 50%",
   },
   {
-    title: "Story Films",
-    copy: "Honest films for the people behind the businesses, brands, and places that make an impact.",
-    status: "Now booking first story films for makers, brands, and meaningful local work.",
-    image: "/reference-images/story-film-reference.png",
+    title: "Family",
+    copy: "Honest photos of your everyday — the little moments you never want to forget.",
+    status: "Now booking family sessions.",
+    image: "/reference-images/family-couch-reference.jpg",
+    position: "50% 35%",
+  },
+  {
+    title: "Mission Homecomings",
+    copy: "The reunion, the hug, the tears — captured the moment it happens.",
+    status: "Now booking homecomings.",
+    image: null,
     position: "50% 50%",
   },
-];
-
-const journalNotes = [
   {
-    title: "What Makes a Film Feel Honest",
-    copy: "A few thoughts on quiet direction, real movement, and letting people stay themselves on camera.",
-  },
-  {
-    title: "How I Approach Family Stories",
-    copy: "The best family films are built from normal days: breakfast tables, backyard light, and the rituals you barely notice yet.",
-  },
-  {
-    title: "Why Story Films Matter",
-    copy: "For small businesses and personal projects, a film can hold the human reason behind the work.",
+    title: "Couples & Anniversary",
+    copy: "Quiet, real moments between two people — not posed, just true to who you are together.",
+    status: "Now booking couples sessions.",
+    image: null,
+    position: "50% 50%",
   },
 ];
 
@@ -113,36 +112,36 @@ export default function Home() {
             <small>Studio</small>
           </a>
           <nav className="site-nav">
-            <a href="#films">Films</a>
+            <a href="#photography">Photography</a>
             <a href="#about">About</a>
-            <a href="#journal">Journal</a>
             <a href="https://halationstudio11.pixieset.com" target="_blank" rel="noopener noreferrer">
               Client Galleries
             </a>
             <a href="#book">Contact</a>
             <a className="nav-button" href="#book">
-              Book a Film
+              Book a Session
             </a>
           </nav>
           <MobileNav />
         </header>
 
         <div className="hero__content">
-          <p className="eyebrow">Documentary Film &amp; Photography</p>
-          <h1>Films for the moments you&apos;ll want to remember.</h1>
+          <p className="eyebrow">Documentary Photography &amp; Film</p>
+          <h1>Photos for the moments you&apos;ll want to remember.</h1>
           <p>
-            Halation Studio creates cinematic documentary films for families,
-            weddings, and meaningful stories that deserve to be remembered.
+            Halation Studio creates honest documentary photography for
+            families, weddings, homecomings, and the moments that deserve to
+            be remembered — with film when the story calls for it.
           </p>
-          <a className="outline-button" href="#films">
-            Watch Films <span aria-hidden="true">↓</span>
+          <a className="outline-button" href="#photography">
+            See My Work <span aria-hidden="true">↓</span>
           </a>
         </div>
       </section>
 
-      <section className="film-types" id="films">
+      <section className="film-types" id="photography">
         <div className="section-heading">
-          <p className="eyebrow">Films We Tell</p>
+          <p className="eyebrow">Types of Photography</p>
           <h2>
             Every story is different.
             <br />
@@ -151,22 +150,25 @@ export default function Home() {
         </div>
 
         <div className="film-grid">
-          {filmTypes.map((film) => (
-            <article className="film-card" key={film.title}>
+          {photoTypes.map((photo) => (
+            <article className="film-card" key={photo.title}>
               <div className="film-card__image">
-                <Image
-                  src={film.image}
-                  alt=""
-                  fill
-                  sizes="(max-width: 760px) 100vw, 31vw"
-                  style={{ objectPosition: film.position }}
-                />
+                {photo.image ? (
+                  <Image
+                    src={photo.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 760px) 100vw, 31vw"
+                    style={{ objectPosition: photo.position }}
+                  />
+                ) : (
+                  <span className="film-card__image-label">Photos Coming Soon</span>
+                )}
               </div>
-              <h3>{film.title}</h3>
-              <p>{film.copy}</p>
+              <h3>{photo.title}</h3>
+              <p>{photo.copy}</p>
               <div className="film-card__examples">
-                <strong>Now Booking First Films</strong>
-                <span>{film.status}</span>
+                <strong>{photo.status}</strong>
                 <a href="#book">
                   Inquire About This <span aria-hidden="true">→</span>
                 </a>
@@ -189,34 +191,15 @@ export default function Home() {
           <p className="eyebrow">About</p>
           <h2>I believe the best stories are the real ones.</h2>
           <p>
-            I started filming to preserve the moments I never want to forget
-            with my family. Now I get to help others do the same. My approach
-            is simple: document real moments, tell honest stories, and create
-            films that will mean more with time.
+            I started taking photos to preserve the moments I never want to
+            forget with my family. Now I get to help others do the same. My
+            approach is simple: document real moments, tell honest stories,
+            and create photos — and the occasional film — that will mean more
+            with time.
           </p>
-          <a className="outline-button outline-button--dark" href="#journal">
-            Read Field Notes
+          <a className="outline-button outline-button--dark" href="#photography">
+            View My Work
           </a>
-        </div>
-      </section>
-
-      <section className="journal" id="journal">
-        <div className="journal__heading">
-          <p className="eyebrow">Journal</p>
-          <h2>Field notes on filming real life.</h2>
-          <p>
-            Short reflections on documentary filmmaking, family memory, and
-            building stories that feel lived-in.
-          </p>
-        </div>
-        <div className="journal-grid">
-          {journalNotes.map((note) => (
-            <article className="journal-card" key={note.title}>
-              <p className="eyebrow">Note</p>
-              <h3>{note.title}</h3>
-              <p>{note.copy}</p>
-            </article>
-          ))}
         </div>
       </section>
 
@@ -231,8 +214,7 @@ export default function Home() {
             I&apos;m taking on a limited number of weddings through Halation
             Studio — natural, documentary-style photography for couples who
             want their day captured as it really happened, not overly staged.
-            I work solo, so every wedding gets my full attention. Right now
-            I&apos;m focused on photography only.
+            I work solo, so every wedding gets my full attention.
           </p>
           <p>
             Coverage starts with the ceremony and builds up from there — add
@@ -286,11 +268,11 @@ export default function Home() {
 
       <section className="booking" id="book">
         <div className="booking__intro">
-          <p className="eyebrow">Book a Film</p>
+          <p className="eyebrow">Book a Session</p>
           <h2>Tell me what you want to remember.</h2>
           <p>
             Share a few details and I&apos;ll reply with availability, next
-            steps, and the best way to shape the film around your story.
+            steps, and the best way to capture your story.
           </p>
         </div>
 
@@ -312,10 +294,12 @@ export default function Home() {
           </label>
           <label>
             Project Type
-            <select name="filmType" defaultValue="Family film" required>
-              <option>Family film</option>
+            <select name="projectType" defaultValue="Family photos" required>
+              <option>Family photos</option>
               <option>Wedding photography</option>
-              <option>Story film</option>
+              <option>Mission homecoming</option>
+              <option>Couples / anniversary</option>
+              <option>Story / brand photos</option>
               <option>Not sure yet</option>
             </select>
           </label>
@@ -324,7 +308,7 @@ export default function Home() {
             <input name="timeframe" type="text" placeholder="Fall 2026, June wedding, flexible..." />
           </label>
           <label className="booking-form__wide">
-            What should this film preserve?
+            What should this capture?
             <textarea name="message" rows={5} required />
           </label>
           <button className="outline-button outline-button--dark booking-form__button" type="submit">
@@ -339,9 +323,8 @@ export default function Home() {
           <span>Utah County</span>
         </div>
         <nav aria-label="Footer navigation">
-          <a href="#films">Films</a>
+          <a href="#photography">Photography</a>
           <a href="#about">About</a>
-          <a href="#journal">Journal</a>
           <a href="#book">Contact</a>
         </nav>
         <div className="footer-socials">
