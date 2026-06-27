@@ -41,6 +41,66 @@ const journalNotes = [
   },
 ];
 
+const weddingPackages = [
+  {
+    name: "Temple Essentials",
+    price: "$750",
+    bestFor: "Simple temple-day coverage",
+    includes: [
+      "Up to 2 hours of wedding-day coverage",
+      "Temple exit & family photos",
+      "Wedding party photos",
+      "Couple portraits on temple grounds",
+      "150+ edited photos",
+      "Online gallery",
+      "Sneak peeks within 72 hours",
+      "Full gallery in 3–4 weeks",
+    ],
+    featured: false,
+  },
+  {
+    name: "LDS Wedding Day",
+    price: "$1,200",
+    bestFor: "Temple + reception coverage",
+    includes: [
+      "Up to 4 hours of wedding-day coverage",
+      "Everything in Temple Essentials",
+      "Reception details & candids",
+      "Cake cutting, first dance & send-off",
+      "250+ edited photos",
+      "Online gallery",
+      "Sneak peeks within 72 hours",
+      "Full gallery in 4–5 weeks",
+    ],
+    featured: false,
+  },
+  {
+    name: "LDS Wedding Collection",
+    price: "$1,800",
+    bestFor: "The full wedding experience",
+    includes: [
+      "Engagement session",
+      "Bridal / formal session",
+      "Up to 4 hours of wedding-day coverage",
+      "Everything in LDS Wedding Day",
+      "500+ edited photos across all sessions",
+      "Sneak peeks after each session",
+      "Full wedding gallery in 5–6 weeks",
+    ],
+    featured: true,
+  },
+];
+
+const weddingAddOns = [
+  { label: "Engagement session", price: "$300" },
+  { label: "Bridal / formal session", price: "$400" },
+  { label: "Extra wedding-day hour", price: "$150/hr" },
+  { label: "Second photographer", price: "$400–700" },
+  { label: "Additional location", price: "$100" },
+  { label: "Rush delivery", price: "+25%" },
+  { label: "Travel beyond Utah Valley", price: "$0.75/mi" },
+];
+
 export default function Home() {
   return (
     <main className="studio-page">
@@ -168,6 +228,72 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="weddings" id="weddings">
+        <div className="section-heading">
+          <p className="eyebrow">Now Booking — LDS Weddings</p>
+          <h2>Wedding photography, captured honestly.</h2>
+        </div>
+
+        <div className="weddings__intro">
+          <p>
+            I&apos;m taking on select weddings through Halation Studio —
+            natural, documentary-style photography for couples who want their
+            day captured as it really happened, not overly staged. My focus is
+            real moments, family, and emotion.
+          </p>
+          <p>
+            For LDS weddings, coverage begins at the temple exit, since
+            photography isn&apos;t done inside the sealing. From there I
+            document family photos, couple portraits, and your reception. Most
+            couples pair the day with an engagement and a bridal or formal
+            session beforehand.
+          </p>
+        </div>
+
+        <div className="wedding-grid">
+          {weddingPackages.map((pkg) => (
+            <article
+              className={`wedding-card${pkg.featured ? " wedding-card--featured" : ""}`}
+              key={pkg.name}
+            >
+              {pkg.featured && (
+                <span className="wedding-card__tag">Most Popular</span>
+              )}
+              <h3 className="wedding-card__name">{pkg.name}</h3>
+              <p className="wedding-card__price">{pkg.price}</p>
+              <p className="wedding-card__best">{pkg.bestFor}</p>
+              <ul className="wedding-card__list">
+                {pkg.includes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <a className="wedding-card__cta" href="#book">
+                Inquire <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          ))}
+        </div>
+
+        <div className="wedding-addons">
+          <p className="eyebrow">Add-Ons</p>
+          <ul>
+            {weddingAddOns.map((addon) => (
+              <li key={addon.label}>
+                <span>{addon.label}</span>
+                <span className="wedding-addons__price">{addon.price}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p className="weddings__note">
+          Introductory pricing while I build the wedding side of Halation
+          Studio. A non-refundable retainer books your date, with the balance
+          split across your sessions. Photography is not done inside the temple
+          sealing.
+        </p>
+      </section>
+
       <section className="booking" id="book">
         <div className="booking__intro">
           <p className="eyebrow">Book a Film</p>
@@ -199,6 +325,7 @@ export default function Home() {
             <select name="filmType" defaultValue="Family film" required>
               <option>Family film</option>
               <option>Wedding film</option>
+              <option>Wedding photography</option>
               <option>Story film</option>
               <option>Not sure yet</option>
             </select>
