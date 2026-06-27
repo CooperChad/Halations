@@ -1,5 +1,7 @@
 import Image from "next/image";
 import heroImage from "@/Pictures/IMG_8842.jpeg";
+import homecomingImage from "@/Pictures/_DSC2315.jpg";
+import anniversaryImage from "@/Pictures/_DSC3679.jpg";
 import MobileNav from "./components/MobileNav";
 
 const photoTypes = [
@@ -21,15 +23,15 @@ const photoTypes = [
     title: "Mission Homecomings",
     copy: "The reunion, the hug, the tears — captured the moment it happens.",
     status: "Now booking homecomings.",
-    image: null,
-    position: "50% 50%",
+    image: homecomingImage,
+    position: "50% 30%",
   },
   {
     title: "Couples & Anniversary",
     copy: "Quiet, real moments between two people — not posed, just true to who you are together.",
     status: "Now booking couples sessions.",
-    image: null,
-    position: "50% 50%",
+    image: anniversaryImage,
+    position: "50% 25%",
   },
 ];
 
